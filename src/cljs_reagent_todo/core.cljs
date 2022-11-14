@@ -5,7 +5,7 @@
 ;; -------------------------
 ;; Views
 (def todos (r/atom
-            [{:desc "Cozinhar a massa" :color "green"}]))
+            [{:desc "Cozinhar a massa" :color "green" :key "czmassa"}]))
 
 (defn todo-item [todo]
   [:li {:style {:color (:color todo)}}(:desc todo)])
@@ -15,7 +15,8 @@
     (fn []
       [:form {:on-submit (fn [e]
                            (.preventDefault e)
-                           (swap! todos conj {:color "green" :desc @novo-item}))}
+                           (swap! todos conj {:color "green" :desc @novo-item :key @novo-item})
+                           (reset! novo-item ""))}
        [:input {:type "text"
                 :value @novo-item
                 :placeholder "Adicione um novo item"
