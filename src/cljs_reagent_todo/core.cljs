@@ -1,14 +1,29 @@
 (ns cljs-reagent-todo.core
-    (:require [reagent.dom :as d]))
+    (:require [reagent.core :as r]
+              [reagent.dom :as d]))
 
 ;; -------------------------
 ;; Views
+(def todos (r/atom
+            [{:desc "Cozinhar a massa" :color "green"}]))
 (defn todo-item [todo]
   [:li {:style {:color (:color todo)}}(:desc todo)])
+
+(defn todo-form []
+  (let [novo-item (r/atom "")]
+    (fn []
+      [:form {:on-submit (fn [e]
+                           (.preventDefault e)
+                           (swap! todos conj {:color "green" :desc @novo-item}))}
+       [:input {:type "text"
+                :value @novo-item
+                :placeholder "Adicione um novo item"
+                :on-change #(reset! novo-item (-> % .-target .-value))}]])))
 
 (defn home-page []
   [:header [:h2 "Welcome to Reagent"]
    [:p "Adicione um novo item abaixo: "]
+   [todo-form]
    [:ul
     [todo-item {:desc "Cozinhar a massa" :color "green"}]]])
 
