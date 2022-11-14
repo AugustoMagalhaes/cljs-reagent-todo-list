@@ -6,6 +6,7 @@
 ;; Views
 (def todos (r/atom
             [{:desc "Cozinhar a massa" :color "green"}]))
+
 (defn todo-item [todo]
   [:li {:style {:color (:color todo)}}(:desc todo)])
 
@@ -25,7 +26,8 @@
    [:p "Adicione um novo item abaixo: "]
    [todo-form]
    [:ul
-    [todo-item {:desc "Cozinhar a massa" :color "green"}]]])
+    (for [todo @todos]
+      (todo-item todo))]])
 
 ;; -------------------------
 ;; Initialize app
