@@ -1,0 +1,2 @@
+*.clj linguist-detectable=true
+*.cljs linguist-detectable=true
