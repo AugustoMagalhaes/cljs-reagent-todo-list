@@ -31,7 +31,7 @@
                 :on-change #(reset! novo-item (-> % .-target .-value))}]])))
 
 (defn home-page []
-  [:header [:h2 "Welcome to Reagent"]
+  [:header [:h2 "Lista de Tarefas com Reagent!"]
    [:p "Adicione um novo item abaixo: "]
    [todo-form]
    [todo-list]])
