@@ -5,10 +5,10 @@
 ;; -------------------------
 ;; Views
 (def todos (r/atom
-            [{:desc "Cozinhar a massa" :color "green" :key "czmassa"}]))
+            []))
 
 (defn todo-item [todo]
-  [:li {:style {:color (:color todo)}}(:desc todo)])
+  [:li {:style {:color "green"} :key (str todo)}(:desc todo)])
 
 (defn todo-form []
   (let [novo-item (r/atom "")]
