@@ -10,6 +10,11 @@
 (defn todo-item [todo]
   [:li {:style {:color (if (:completed todo) "green" "red")} :key (str todo)}(:desc todo)])
 
+(defn todo-list []
+  [:ul 
+   (for [todo @todos]
+     (todo-item todo))])
+
 (defn todo-form []
   (let [novo-item (r/atom "")
         novo-item-completado (r/atom false)]
@@ -29,11 +34,8 @@
   [:header [:h2 "Welcome to Reagent"]
    [:p "Adicione um novo item abaixo: "]
    [todo-form]
-   [:ul
-    (for [todo @todos]
-      (todo-item todo))]])
+   [todo-list]])
 
-;; -------------------------
 ;; Initialize app
 
 (defn mount-root []
